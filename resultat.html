@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Résultat - Cycloo Cartoon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Luckiest Guy', cursive;
+      background: #fff8dc;
+      text-align: center;
+      padding-top: 50px;
+    }
+    .winner {
+      font-size: 32px;
+      color: #2ecc71;
+      margin-bottom: 30px;
+    }
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="color: #ff3366;">🏁 Résultat de la course 🏁</h1>
+  <div class="winner" id="resultText">Calcul du vainqueur...</div>
+  <button onclick="window.location.href='index.html'">Rejouer une course</button>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const winner = params.get("winner");
+    document.getElementById("resultText").textContent = "🥇 Vainqueur : " + winner + " !";
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8"><title>Résultats</title></head>
+<body>
+  <h2>Résultats de la course</h2>
+  <p id="winner"></p>
+  <a href="cycloo_classement.html">Voir le classement général</a>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const winner = urlParams.get("winner");
+    document.getElementById("winner").textContent = "Vainqueur : " + winner;
+  </script>
+</body>
+</html>

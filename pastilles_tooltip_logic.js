@@ -1,0 +1,1 @@
+contenu à extraire de textdoc

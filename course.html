@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Cycloo Iso - Zoom et Vitesse</title>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Luckiest Guy', cursive;
+      background: #fff8dc;
+      overflow: hidden;
+    }
+    #viewport {
+      width: 100vw;
+      height: 500px;
+      overflow: hidden;
+      position: relative;
+    }
+    #track {
+      width: 3000px;
+      height: 500px;
+      background: url('background-track-final.svg') no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+    .cyclist {
+      position: absolute;
+      width: 60px;
+      text-align: center;
+    }
+    .cyclist img {
+      width: 60px;
+      height: 60px;
+    }
+    .score {
+      font-size: 22px;
+      color: #fff;
+    }
+    .name {
+      font-size: 16px;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center; color:#ff3366;">🚴 Cycloo - Vue Zoomée et Rapide 🚴</h1>
+  <div id="viewport">
+    <div id="track"></div>
+  </div>
+
+  <script>
+    const joueurs = [
+      { nom: localStorage.getItem("pseudo") || "Toi", equipe: localStorage.getItem("equipe") || "rouge", pos: 0 },
+      { nom: "Bot 1", equipe: "bleu", pos: 0 },
+      { nom: "Bot 2", equipe: "vert", pos: 0 }
+    ];
+
+    const track = document.getElementById("track");
+
+    joueurs.forEach((joueur, i) => {
+      const el = document.createElement("div");
+      el.className = "cyclist";
+      el.id = "j" + i;
+      el.style.top = (330 + i * 70) + "px";
+
+      const score = document.createElement("div");
+      score.className = "score";
+      score.id = "s" + i;
+      score.textContent = "0";
+
+      const img = document.createElement("img");
+      img.src = "cyclist_" + joueur.equipe + ".svg";
+
+      const name = document.createElement("div");
+      name.className = "name";
+      name.textContent = joueur.nom;
+
+      el.appendChild(score);
+      el.appendChild(img);
+      el.appendChild(name);
+      track.appendChild(el);
+    });
+
+    let courseTerminee = false;
+
+    function avancer() {
+      if (courseTerminee) return;
+
+      joueurs.forEach((joueur, i) => {
+        joueur.pos += joueur.vitesse * 0.8; // vitesse augmentée
+        if (joueur.pos > 2960) {
+          courseTerminee = true;
+          window.location.href = "resultat.html?winner=" + encodeURIComponent(joueur.nom);
+        }
+        const el = document.getElementById("j" + i);
+        el.style.left = joueur.pos + "px";
+      });
+
+      const joueurPrincipal = joueurs[0];
+      let scroll = joueurPrincipal.pos - window.innerWidth / 2;
+      scroll = Math.max(0, Math.min(scroll, 3000 - window.innerWidth));
+      track.style.transform = `translateX(${-scroll}px)`;
+    }
+
+    function lancerDes() {
+      joueurs.forEach((joueur, i) => {
+        const val = Math.floor(Math.random() * 11) + 2;
+        joueur.vitesse = val;
+        document.getElementById("s" + i).textContent = val;
+      });
+    }
+
+    setInterval(lancerDes, 2000);
+    setInterval(avancer, 100);
+  </script>
+</body>
+</html>

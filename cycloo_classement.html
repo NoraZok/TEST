@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8"><title>Classement Général</title></head>
+<body>
+  <h2>Classement Général</h2>
+  <ul id="classement"></ul>
+  <script>
+    const scores = JSON.parse(localStorage.getItem("scores") || "{}");
+    const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+    const ul = document.getElementById("classement");
+    sorted.forEach(([nom, points]) => {
+      const li = document.createElement("li");
+      li.textContent = nom + " : " + points + " points";
+      ul.appendChild(li);
+    });
+  </script>
+</body>
+</html>

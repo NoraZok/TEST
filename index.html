@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cycloo Cartoon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Luckiest Guy', cursive;
+      background: #fff8dc;
+      text-align: center;
+      padding-top: 40px;
+    }
+    input, select, button {
+      font-size: 20px;
+      margin: 10px;
+      padding: 5px 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="color: #ff3366;">🚴 Bienvenue sur ProCycling  !</h1>
+  <form action="course.html" method="get" onsubmit="savePlayerInfo()">
+    <label>Pseudo : <input id="pseudo" required></label><br>
+    <label>Équipe :
+      <select id="equipe">
+        <option value="rouge">🚴 Rouge</option>
+        <option value="bleu">🚴 Bleu</option>
+        <option value="vert">🚴 Vert</option>
+      </select>
+    </label><br>
+    <button type="submit">Démarrer</button>
+  </form>
+  <script>
+    function savePlayerInfo() {
+      localStorage.setItem("pseudo", document.getElementById("pseudo").value);
+      localStorage.setItem("equipe", document.getElementById("equipe").value);
+    }
+  </script>
+</body>
+</html>
